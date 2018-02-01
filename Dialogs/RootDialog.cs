@@ -1,8 +1,7 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Connector;
 using MyBot.Dialogs;
-using Siritsit.Models;
+using MyBot.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,9 +33,15 @@ namespace MyDialogs
 
             await context.PostAsync("Hello there! Let's get started.");
 
-            //a bunch of questions are usually asked here to determine which LUIS Dialog I will call because I have several
-            //right now, let's just go straight to the Application dialog
+            //Call VerticalChoiceForm that breaks when I update nuget Bot to 13.3.0
+            context.Call(new VerticalChoiceForm(), VerticalChoiceFormResumeAfter);
+        }
 
+        private async Task VerticalChoiceFormResumeAfter(IDialogContext context, IAwaitable<object> result)
+        {
+            var message = await result;
+
+            //Application Dialog calls ApplyForm where I reported a bug with RESET
             var app = new MyApplication();
             context.Call(app, ApplicationResumeAfter);
         }

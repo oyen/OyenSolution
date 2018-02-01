@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Siritsit.Models
+﻿namespace MyBot.Models
 {
 
+    using System;
+    
     [Serializable]
     public class CustomerAccount
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
-using Siritsit.Models;
+using MyBot.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -46,6 +46,7 @@ namespace MyBot.Dialogs
         public static IForm<ApplyForm> BuildForm()
         {
             var form = new FormBuilder<ApplyForm>()
+                    .Message("Do not answer any of this Form's questions and just say RESET then you will see that it will then prompt you for an answer to the first Field which was actually prefilled from StartAsync.")
                     .Field(nameof(FirstName),
                     active: (state) =>
                     {
